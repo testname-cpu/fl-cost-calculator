@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>FLコスト＆労働分配率 計算ツール</title>
+  <style>
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+    }
+    h1 {
+      text-align: center;
+      color: #00796b;
+      margin-bottom: 30px;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #00796b;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #004d40;
+    }
+    .result {
+      background: #ffffff;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 5px solid #00796b;
+    }
+    a {
+      color: #00796b;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>FLコスト＆労働分配率 計算ツール</h1>
+
+  <label>売上高（円）</label>
+  <input id="sales" type="number">
+
+  <label>原価（円）</label>
+  <input id="cost" type="number">
+
+  <label>人件費（円）</label>
+  <input id="labor" type="number">
+
+  <button onclick="calculate()">計算する</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculate() {
+      const sales = +document.getElementById('sales').value;
+      const cost = +document.getElementById('cost').value;
+      const labor = +document.getElementById('labor').value;
+
+      const flCost = cost + labor;
+      const flRate = (flCost / sales) * 100;
+      const grossProfit = sales - cost;
+      const laborShare = (labor / grossProfit) * 100;
+
+      document.getElementById('result').innerHTML = `
+        <strong>FLコスト：</strong>${flCost.toLocaleString()} 円<br>
+        <strong>FLコスト比率：</strong>${flRate.toFixed(2)} %<br>
+        <strong>粗利益：</strong>${grossProfit.toLocaleString()} 円<br>
+        <strong>労働分配率：</strong>${laborShare.toFixed(2)} %
+      `;
+    }
+  </script>
+
+  <p style="text-align:center; margin-top: 30px;">
+    💼 他の業務効率化ツールもチェック 👉 <a href="https://bit.ly/4iJ4576" target="_blank">おすすめ自動化ツール集</a>
+  </p>
+</body>
+</html>
